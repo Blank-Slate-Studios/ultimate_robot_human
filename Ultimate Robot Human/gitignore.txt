@@ -1,0 +1,3 @@
+# ignore Temp folder for Permissions Denied error 
+Logs/
+Temp/

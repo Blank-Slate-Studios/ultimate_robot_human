@@ -13,6 +13,7 @@ public class Death : MonoBehaviour
         {
             //Destroy(collision.gameObject);
             //StartCoroutine("Respawn", 1f);
+            Debug.Log("respawning");
             collision.transform.position = spawnPoint.position;
         }
     }

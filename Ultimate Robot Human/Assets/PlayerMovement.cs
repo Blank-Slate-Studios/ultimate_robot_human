@@ -33,4 +33,16 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
         jump = false;
     }
+
+    void OnCollisionEnter2D(Collision2D colObj)
+    {
+        if (colObj.gameObject.tag.Equals("Lethal"))
+        {
+            Debug.Log("Death");
+        }
+        if (colObj.gameObject.tag.Equals("Finish"))
+        {
+            Debug.Log("Success");
+        }
+    }
 }

@@ -1,0 +1,28 @@
+﻿<Properties StartupConfiguration="{6156D9F0-9538-D75D-9A08-11892E5B250D}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/SpawnFinish.cs">
+    <Files>
+      <File FileName="Assets/Scripts/SpawnPlayer.cs" Line="15" Column="73" />
+      <File FileName="Assets/Scripts/SpawnFinish.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Ultimate Robot Human" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="Scripts" expanded="True">
+                <Node name="SpawnPlayer.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="a55896fc-1cbf-4adf-aa6f-2feb526591a9" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

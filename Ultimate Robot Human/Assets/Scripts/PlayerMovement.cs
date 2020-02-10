@@ -9,11 +9,14 @@ public class PlayerMovement : MonoBehaviour
     public float runSpeed = 40f;
     float horizontalMove = 0f;
     bool jump = false;
+    public GameObject gameOverText, winText, restartButton;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameOverText.SetActive(false);
+        winText.SetActive(false);
+        restartButton.SetActive(false);
     }
 
     // Update is called once per frame
@@ -39,10 +42,14 @@ public class PlayerMovement : MonoBehaviour
         if (colObj.gameObject.tag.Equals("Lethal"))
         {
             Debug.Log("Death");
+            gameOverText.SetActive(true);
+            restartButton.SetActive(true);
         }
         if (colObj.gameObject.tag.Equals("Finish"))
         {
             Debug.Log("Success");
+            winText.SetActive(true);
+            restartButton.SetActive(true);
         }
     }
 }

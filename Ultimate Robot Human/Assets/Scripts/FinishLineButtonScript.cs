@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlockButtonScript : MonoBehaviour
+public class FinishLineButtonScript : MonoBehaviour
 {
-    public GameObject blockPrefab;
+    public GameObject finishLinePrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -12,9 +12,9 @@ public class BlockButtonScript : MonoBehaviour
         
     }
 
-    public void spawnBlock()
+    public void spawnFinishLine()
     {
-        GameObject block = Instantiate(blockPrefab) as GameObject;
+        GameObject finishLine = Instantiate(finishLinePrefab) as GameObject;
     }
 
     // Update is called once per frame

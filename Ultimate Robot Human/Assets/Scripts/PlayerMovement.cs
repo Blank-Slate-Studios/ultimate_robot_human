@@ -49,10 +49,11 @@ public class PlayerMovement : MonoBehaviour
         if (colObj.gameObject.tag.Equals("Lethal"))
         {
             Debug.Log("Death");
-            gameOverText.SetActive(true);
-            restartButton.SetActive(true);
-            gameStop = true;
+            //gameOverText.SetActive(true);
+            //restartButton.SetActive(true);
+            //gameStop = true;
             rigid.velocity = Vector2.zero;
+            Destroy(gameObject);
         }
         if (colObj.gameObject.tag.Equals("Finish"))
         {

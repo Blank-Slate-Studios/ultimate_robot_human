@@ -1,10 +1,12 @@
 ﻿<Properties StartupConfiguration="{6156D9F0-9538-D75D-9A08-11892E5B250D}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/CreateObstacle.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/PlayerMovement.cs">
     <Files>
       <File FileName="Assets/Scripts/SpawnPlayer.cs" Line="7" Column="5" />
-      <File FileName="Assets/Scripts/SpawnFinish.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/CreateObstacle.cs" Line="27" Column="9" />
-      <File FileName="Assets/Scripts/DragDrop.cs" Line="20" Column="94" />
+      <File FileName="Assets/Scripts/SpawnFinish.cs" />
+      <File FileName="Assets/Scripts/CreateObstacle.cs" />
+      <File FileName="Assets/Scripts/DragDrop.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/PlayerMovement.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/CharacterController2D.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -16,7 +18,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="fd3fccb2-b2f0-44c9-aa0c-a848163150b0" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="3b78b977-bae5-43b5-9114-834e1279d92b" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

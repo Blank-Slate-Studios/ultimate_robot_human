@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 6468887015713275332}
   m_Layer: 8
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -222,6 +222,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 6468887015713275386}
   runSpeed: 40
+  gameOverText: {fileID: 0}
+  winText: {fileID: 0}
+  restartButton: {fileID: 0}
+  nextLevelButton: {fileID: 0}
+  gameStop: 0
 --- !u!1 &6468887016899949073
 GameObject:
   m_ObjectHideFlags: 0

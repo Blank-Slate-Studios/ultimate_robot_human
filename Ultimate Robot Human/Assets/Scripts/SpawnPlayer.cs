@@ -18,6 +18,9 @@ public class SpawnPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(GameObject.FindGameObjectWithTag("Player") == null)
+        {
+            Instantiate(playerPrefab, spawnPoints[randomSpawnPoint].position, Quaternion.identity);
+        }
     }
 }

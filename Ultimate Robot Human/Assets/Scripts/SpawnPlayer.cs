@@ -23,4 +23,10 @@ public class SpawnPlayer : MonoBehaviour
             Instantiate(playerPrefab, spawnPoints[randomSpawnPoint].position, Quaternion.identity);
         }
     }
+
+    public void spawnPlayer()
+    {
+        randomSpawnPoint = Random.Range(0, spawnPoints.Length);
+        Instantiate(playerPrefab, spawnPoints[randomSpawnPoint].position, Quaternion.identity);
+    }
 }

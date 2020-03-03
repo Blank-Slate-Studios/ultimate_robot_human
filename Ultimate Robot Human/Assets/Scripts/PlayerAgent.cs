@@ -5,11 +5,16 @@ using MLAgents;
 
 public class PlayerAgent : Agent
 {
+    [SerializeField] private float m_JumpForce = 400f;                          // Amount of force added when the player jumps.
+    [Range(0, 1)] [SerializeField] private float m_CrouchSpeed = .36f;          // Amount of maxSpeed applied to crouching movement. 1 = 100%
+    [Range(0, .3f)] [SerializeField] private float m_MovementSmoothing = .05f;  // How much to smooth out the movement
+    [SerializeField] private bool m_AirControl = false;                         // Whether or not a player can steer while jumping;
     [SerializeField] private LayerMask m_WhatIsGround;                          // A mask determining what is ground to the character
     [SerializeField] private Transform m_GroundCheck;                           // A position marking where to check if the player is grounded.
-    [SerializeField] private Transform m_CeilingCheck;							// A position marking where to check for ceilings
+    [SerializeField] private Transform m_CeilingCheck;                          // A position marking where to check for ceilings
+    [SerializeField] private Collider2D m_CrouchDisableCollider;				// A collider that will be disabled when crouching
 
-    const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
+    const float k_GroundedRadius = .01f; // Radius of the overlap circle to determine if grounded
     private bool m_Grounded;            // Whether or not the player is grounded.
     const float k_CeilingRadius = .2f; // Radius of the overlap circle to determine if the player can stand up
 
@@ -104,7 +109,6 @@ public class PlayerAgent : Agent
     }
 
     public float speed = 40f;
-    public float jumpForce = 700f;
     private int directionX = 0;
     private int directionY = 0;
     public override void AgentAction(float[] vectorAction)
@@ -117,8 +121,12 @@ public class PlayerAgent : Agent
         // Look up index in jump action list
         if (jump == 1 && isGrounded()) { directionY = 1; }
 
-        //rigid.AddForce(new Vector2(directionX * speed, directionY * jumpForce));
-        rigid.AddForce(new Vector2(directionX * speed, 0));
+        rigid.AddForce(new Vector2(directionX * speed, directionY * m_JumpForce));
+
+        // Add mask to jump action
+
+
+        //rigid.AddForce(new Vector2(directionX * speed, 0));
         directionY = 0;
         directionX = 0;
 
@@ -132,14 +140,21 @@ public class PlayerAgent : Agent
         if (finishCol)
         {
             Debug.Log("success");
-            SetReward(1.0f);
+            AddReward(1.0f);
             Done();
         }
 
         if (lethalCol)
         {
             Debug.Log("death");
-            SetReward(-0.5f);
+            AddReward(-0.5f);
+            Done();
+        }
+
+        AddReward(-0.01f);
+
+        if (GetCumulativeReward() <= -1.0f)
+        {
             Done();
         }
     }
@@ -147,8 +162,19 @@ public class PlayerAgent : Agent
     public override float[] Heuristic()
     {
         var action = new float[2];
-        action[0] = Input.GetAxis("Horizontal");
-        action[1] = Input.GetAxis("Vertical");
+        action[0] = Input.GetAxisRaw("Horizontal");
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            action[1] = 1.0f;
+        }
+        else
+        {
+            action[1] = 0.0f;
+        }
+
+        //action[1] = Input.GetAxisRaw("Vertical");
+        
         //action[1] = Mathf.FloorToInt(Input.GetButtonDown("Jump"));
         return action;
     }

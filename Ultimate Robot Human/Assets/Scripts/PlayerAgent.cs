@@ -22,16 +22,37 @@ public class PlayerAgent : Agent
     public bool finishCol = false;
 
     public Rigidbody2D rigid;
-    public SpawnPlayer spawner;
+    //public SpawnPlayer spawner;
 
-    [SerializeField] Transform[] spawnPoints;
+    //Transform[] playerSpawnPoints = new Transform[4];
+    Vector3[] playerSpawnPoints = new Vector3[4];
+    Vector3[] finishSpawnPoints = new Vector3[9];
     //[SerializeField] GameObject playerPrefab;
     int randomSpawnPoint;
+    int randomFinishSpawnPoint;
 
     // Start is called before the first frame update
     void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
+
+        playerSpawnPoints[0] = new Vector3(-5.47f, 0.53f, 0);
+        playerSpawnPoints[1] = new Vector3(4.48f, 0.53f, 0);
+        playerSpawnPoints[2] = new Vector3(4.48f, 6.51f, 0);
+        playerSpawnPoints[3] = new Vector3(-5.47f, 6.51f, 0);
+
+        finishSpawnPoints[0] = new Vector3(-0.503f, 2.52f, 0);
+        finishSpawnPoints[1] = new Vector3(-7.49f, 5.55f, 0);
+        finishSpawnPoints[2] = new Vector3(-3.52f, 5.55f, 0);
+        finishSpawnPoints[3] = new Vector3(2.47f, 5.55f, 0);
+        finishSpawnPoints[4] = new Vector3(6.46f, 5.55f, 0);
+        finishSpawnPoints[5] = new Vector3(6.46f, -0.46f, 0);
+        finishSpawnPoints[6] = new Vector3(2.51f, -0.46f, 0);
+        finishSpawnPoints[7] = new Vector3(-3.48f, -0.46f, 0);
+        finishSpawnPoints[8] = new Vector3(-7.43f, -0.46f, 0);
+        
+
+        //Debug.Log(this.transform.localPosition);
     }
 
     private bool isGrounded()
@@ -71,37 +92,33 @@ public class PlayerAgent : Agent
 
     public override void AgentReset()
     {
+        randomSpawnPoint = Random.Range(0, playerSpawnPoints.Length);
+        randomFinishSpawnPoint = Random.Range(0, finishSpawnPoints.Length);
+
+        // Address lethal collision
         if (lethalCol)
         {
-            // Lethal collision, reset player
-            rigid.velocity = Vector2.zero;
-            //this.transform.position = new Vector2(-8.54f, -0.77f);
-            //spawner.spawnPlayer();
-            randomSpawnPoint = Random.Range(0, spawnPoints.Length);
-            //Instantiate(playerPrefab, spawnPoints[randomSpawnPoint].position, Quaternion.identity);
-            this.transform.position = spawnPoints[randomSpawnPoint].position;
-            lethalCol = false;
-
         }
 
         // Address finish line collision
-        if (finishCol)
+        else if (finishCol)
         {
-            rigid.velocity = Vector2.zero;
-            //this.transform.position = new Vector2(-8.54f, -0.77f);
-            //spawner.spawnPlayer();
-            randomSpawnPoint = Random.Range(0, spawnPoints.Length);
-            //Instantiate(playerPrefab, spawnPoints[randomSpawnPoint].position, Quaternion.identity);
-            this.transform.position = spawnPoints[randomSpawnPoint].position;
-            finishCol = false;
         }
+
+        rigid.velocity = Vector2.zero;
+        this.transform.localPosition = playerSpawnPoints[randomSpawnPoint];
+        //Target.localPosition = finishSpawnPoints[randomFinishSpawnPoint];
+
+        Target.localPosition = finishSpawnPoints[randomFinishSpawnPoint];
+        lethalCol = false;
+        finishCol = false;
     }
 
     public override void CollectObservations()
     {
         // Target and Agent positions
-        AddVectorObs(Target.position);
-        AddVectorObs(this.transform.position);
+        AddVectorObs(Target.localPosition);
+        AddVectorObs(this.transform.localPosition);
 
         // Agent velocity
         AddVectorObs(rigid.velocity.x);

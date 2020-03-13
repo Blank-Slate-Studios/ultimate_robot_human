@@ -40,14 +40,12 @@ GameObject:
   m_Component:
   - component: {fileID: 6468887015713275384}
   - component: {fileID: 6468887015713275387}
-  - component: {fileID: 6468887015713275386}
   - component: {fileID: 6468887015713275385}
   - component: {fileID: 6468887015713275335}
-  - component: {fileID: 6468887015713275334}
-  - component: {fileID: 6468887015713275332}
   - component: {fileID: 4129076815498986948}
   - component: {fileID: 931411893068154910}
   - component: {fileID: 7767866043934392355}
+  - component: {fileID: 8714377191149700246}
   m_Layer: 8
   m_Name: ML-Player
   m_TagString: Player
@@ -120,34 +118,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6468887015713275386
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6468887015713275389}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1d6af7d519cbc3489c5c014b51638b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_JumpForce: 700
-  m_CrouchSpeed: 0.36
-  m_MovementSmoothing: 0.05
-  m_AirControl: 1
-  m_WhatIsGround:
-    serializedVersion: 2
-    m_Bits: 567
-  m_GroundCheck: {fileID: 6468887015607496941}
-  m_CeilingCheck: {fileID: 6468887016899949086}
-  m_CrouchDisableCollider: {fileID: 0}
-  OnLandEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnCrouchEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!50 &6468887015713275385
 Rigidbody2D:
   serializedVersion: 4
@@ -182,7 +152,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.03}
+  m_Offset: {x: 0, y: -0.048289478}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -193,43 +163,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.14333117, y: 0.11539814}
+  m_Size: {x: 0.1522497, y: 0.22352013}
   m_EdgeRadius: 0
---- !u!58 &6468887015713275334
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6468887015713275389}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: 4cdfd938e680b4a1fa8feb2b36b49040, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.002538091, y: -0.09000001}
-  serializedVersion: 2
-  m_Radius: 0.07210694
---- !u!114 &6468887015713275332
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6468887015713275389}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62113b57943ba014aaf1ebbd1bf1c494, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controller: {fileID: 6468887015713275386}
-  runSpeed: 40
-  gameOverText: {fileID: 0}
-  winText: {fileID: 0}
-  restartButton: {fileID: 0}
-  nextLevelButton: {fileID: 0}
-  gameStop: 0
 --- !u!114 &4129076815498986948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,7 +183,7 @@ MonoBehaviour:
     vectorActionSize: 0300000002000000
     vectorActionDescriptions: []
     vectorActionSpaceType: 0
-  m_Model: {fileID: 5022602860645237092, guid: ca633bd2d327f7142ad4ab707a30d490, type: 3}
+  m_Model: {fileID: 0}
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: ML-Player-Brain1
@@ -271,18 +206,18 @@ MonoBehaviour:
   hasUpgradedFromAgentParameters: 1
   maxStep: 0
   m_JumpForce: 400
-  m_CrouchSpeed: 0.36
   m_MovementSmoothing: 0.05
   m_AirControl: 0
   m_WhatIsGround:
     serializedVersion: 2
-    m_Bits: 0
-  m_GroundCheck: {fileID: 0}
-  m_CeilingCheck: {fileID: 0}
-  m_CrouchDisableCollider: {fileID: 0}
-  lethalCol: 0
-  finishCol: 0
+    m_Bits: 513
+  m_GroundCheck: {fileID: 6468887015607496941}
+  m_CeilingCheck: {fileID: 6468887016899949086}
   rigid: {fileID: 6468887015713275385}
+  hitGroundColliders:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   Target: {fileID: 1918259850466119189, guid: fb3709c5249f840f8a543d8bf2485d3f, type: 3}
   speed: 10
 --- !u!114 &7767866043934392355
@@ -300,6 +235,34 @@ MonoBehaviour:
   DecisionPeriod: 5
   RepeatAction: 1
   offsetStep: 0
+--- !u!114 &8714377191149700246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6468887015713275389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f67c7e722ba14acd9153bb4488bff6e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sensorName: RayPerceptionSensor
+  detectableTags:
+  - Solid
+  - Lethal
+  - Finish
+  raysPerDirection: 8
+  maxRayDegrees: 180
+  sphereCastRadius: 0
+  rayLength: 2
+  rayLayerMask:
+    serializedVersion: 2
+    m_Bits: 513
+  observationStacks: 1
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  useWorldPositions: 1
 --- !u!1 &6468887016899949073
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,34 +6,31 @@ using MLAgents;
 public class PlayerAgent : Agent
 {
     [SerializeField] private float m_JumpForce = 400f;                          // Amount of force added when the player jumps.
-    [Range(0, 1)] [SerializeField] private float m_CrouchSpeed = .36f;          // Amount of maxSpeed applied to crouching movement. 1 = 100%
     [Range(0, .3f)] [SerializeField] private float m_MovementSmoothing = .05f;  // How much to smooth out the movement
-    [SerializeField] private bool m_AirControl = false;                         // Whether or not a player can steer while jumping;
+    [SerializeField] private bool m_AirControl = true;                          // Whether or not a player can steer while jumping;
     [SerializeField] private LayerMask m_WhatIsGround;                          // A mask determining what is ground to the character
     [SerializeField] private Transform m_GroundCheck;                           // A position marking where to check if the player is grounded.
     [SerializeField] private Transform m_CeilingCheck;                          // A position marking where to check for ceilings
-    [SerializeField] private Collider2D m_CrouchDisableCollider;				// A collider that will be disabled when crouching
 
-    const float k_GroundedRadius = .01f; // Radius of the overlap circle to determine if grounded
+    const float k_GroundedRadius = .1f; // Radius of the overlap circle to determine if grounded
     private bool m_Grounded;            // Whether or not the player is grounded.
     const float k_CeilingRadius = .2f; // Radius of the overlap circle to determine if the player can stand up
-
-    public bool lethalCol = false;
-    public bool finishCol = false;
-
+    private Rigidbody2D m_Rigidbody2D;
+    private bool m_FacingRight = true; // Which way is player facing
+    private Vector3 m_Velocity = Vector3.zero;
+    
     public Rigidbody2D rigid;
-    //public SpawnPlayer spawner;
-
-    //Transform[] playerSpawnPoints = new Transform[4];
+    
     Vector3[] playerSpawnPoints = new Vector3[4];
     Vector3[] finishSpawnPoints = new Vector3[9];
-    //[SerializeField] GameObject playerPrefab;
     int randomSpawnPoint;
     int randomFinishSpawnPoint;
 
-    // Start is called before the first frame update
-    void Start()
+    public Collider[] hitGroundColliders = new Collider[3];
+
+    public override void InitializeAgent()
     {
+        m_Rigidbody2D = GetComponent<Rigidbody2D>();
         rigid = GetComponent<Rigidbody2D>();
 
         playerSpawnPoints[0] = new Vector3(-5.47f, 0.53f, 0);
@@ -50,9 +47,11 @@ public class PlayerAgent : Agent
         finishSpawnPoints[6] = new Vector3(2.51f, -0.46f, 0);
         finishSpawnPoints[7] = new Vector3(-3.48f, -0.46f, 0);
         finishSpawnPoints[8] = new Vector3(-7.43f, -0.46f, 0);
-        
+    }
 
-        //Debug.Log(this.transform.localPosition);
+    public bool DoGroundCheck()
+    {
+        return false;
     }
 
     private bool isGrounded()
@@ -74,18 +73,13 @@ public class PlayerAgent : Agent
     {
         if (colObj.gameObject.tag.Equals("Lethal"))
         {
-            //Debug.Log("Death");
-            //gameStop = true;
-            //rigid.velocity = Vector2.zero;
-            lethalCol = true;
+            SetReward(-1f);
         }
         if (colObj.gameObject.tag.Equals("Finish"))
         {
-            //Debug.Log("Success");
-            //gameStop = true;
-            //rigid.velocity = Vector2.zero;
-            finishCol = true;
+            SetReward(1f);
         }
+        Done();
     }
 
     public Transform Target;
@@ -94,24 +88,10 @@ public class PlayerAgent : Agent
     {
         randomSpawnPoint = Random.Range(0, playerSpawnPoints.Length);
         randomFinishSpawnPoint = Random.Range(0, finishSpawnPoints.Length);
-
-        // Address lethal collision
-        if (lethalCol)
-        {
-        }
-
-        // Address finish line collision
-        else if (finishCol)
-        {
-        }
-
+        
         rigid.velocity = Vector2.zero;
         this.transform.localPosition = playerSpawnPoints[randomSpawnPoint];
-        //Target.localPosition = finishSpawnPoints[randomFinishSpawnPoint];
-
         Target.localPosition = finishSpawnPoints[randomFinishSpawnPoint];
-        lethalCol = false;
-        finishCol = false;
     }
 
     public override void CollectObservations()
@@ -123,6 +103,8 @@ public class PlayerAgent : Agent
         // Agent velocity
         AddVectorObs(rigid.velocity.x);
         AddVectorObs(rigid.velocity.y);
+
+        // Raycast observations?
     }
 
     public float speed = 40f;
@@ -140,37 +122,17 @@ public class PlayerAgent : Agent
 
         rigid.AddForce(new Vector2(directionX * speed, directionY * m_JumpForce));
 
-        // Add mask to jump action
+        // Add mask to jump action?
 
 
         //rigid.AddForce(new Vector2(directionX * speed, 0));
         directionY = 0;
         directionX = 0;
-
-        // Actions size = 1 or 2?
-        //Vector2 controlSignal = Vector2.zero;
-        //controlSignal.x = vectorAction[0];
-        //controlSignal.y = vectorAction[1];
-        //rigid.AddForce(controlSignal * speed);
-
+        
         // Rewards
-        if (finishCol)
-        {
-            Debug.Log("success");
-            AddReward(1.0f);
-            Done();
-        }
+        AddReward(-0.001f);
 
-        if (lethalCol)
-        {
-            Debug.Log("death");
-            AddReward(-0.5f);
-            Done();
-        }
-
-        AddReward(-0.01f);
-
-        if (GetCumulativeReward() <= -1.0f)
+        if (GetCumulativeReward() <= -1f)
         {
             Done();
         }
@@ -179,20 +141,17 @@ public class PlayerAgent : Agent
     public override float[] Heuristic()
     {
         var action = new float[2];
-        action[0] = Input.GetAxisRaw("Horizontal");
 
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetKey(KeyCode.LeftArrow))
         {
-            action[1] = 1.0f;
+            action[0] = 1f;
         }
-        else
+        if (Input.GetKey(KeyCode.RightArrow))
         {
-            action[1] = 0.0f;
+            action[0] = 2f;
         }
-
-        //action[1] = Input.GetAxisRaw("Vertical");
+        action[1] = Input.GetKey(KeyCode.Space) ? 1.0f : 0.0f;
         
-        //action[1] = Mathf.FloorToInt(Input.GetButtonDown("Jump"));
         return action;
     }
 }

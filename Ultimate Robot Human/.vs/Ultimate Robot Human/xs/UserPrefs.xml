@@ -1,24 +1,39 @@
 ﻿<Properties StartupConfiguration="{6156D9F0-9538-D75D-9A08-11892E5B250D}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/PlayerMovement.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/SpawnPlayer.cs">
     <Files>
       <File FileName="Assets/Scripts/SpawnPlayer.cs" Line="7" Column="5" />
       <File FileName="Assets/Scripts/SpawnFinish.cs" />
-      <File FileName="Assets/Scripts/CreateObstacle.cs" />
+      <File FileName="Assets/Scripts/CreateObstacle.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/DragDrop.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/PlayerMovement.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/CharacterController2D.cs" />
+      <File FileName="Assets/Scripts/PlayerMovement.cs" />
+      <File FileName="Assets/Scripts/CharacterController2D.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/PauseScript.cs" />
+      <File FileName="Assets/Scripts/MoveChar.cs" />
+      <File FileName="../ml-agents/com.unity.ml-agents/Runtime/ActionMasker.cs" />
+      <File FileName="Assets/Scripts/PlayerAgent.cs" />
+      <File FileName="Assets/Scripts/RestartButtonScript.cs" />
+      <File FileName="Assets/Scripts/DropSpike.cs" />
+      <File FileName="Assets/Scripts/FrogMove.cs" Line="6" Column="31" />
+      <File FileName="Assets/HawkMove.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="Ultimate Robot Human" expanded="True" />
+          <Node name="Ultimate Robot Human" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="ML-Agents" expanded="True" />
+              <Node name="Scripts" expanded="True">
+                <Node name="SpawnPlayer.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="3b78b977-bae5-43b5-9114-834e1279d92b" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="f360a863-9f70-463e-884f-f06f404b0795" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
